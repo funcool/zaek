@@ -1,0 +1,143 @@
+= Zaek - A lightweight RabbitMQ client for Clojure
+Andrey Antukh, <niwi@niwi.nz>
+0.1.0
+:toc: left
+:!numbered:
+:source-highlighter: pygments
+:pygments-style: friendly
+:sectlinks:
+
+
+== Introduction
+
+TBD
+
+
+=== Rationale
+
+
+I there already exists a RabbitMQ client for clojure, called link:https://github.com/michaelklishin/langohr[langohr];
+that has mature code base and is well established in clojure community. But on my point of view is has some flaws:
+
+- The api of _langohr_ is unnecesary splited in huge namespaces and usage of it is not very comfortable. _zaek_ maintains
+  the most used functions in a `zaek.core` namespace, just import it and use.
+- The api of _langohr_ is highly based on the java client so is not very idiomatic in clojure (contrary to that it claims to be).
+- Is not lighweight as it claims to be, it has huge java code. _zaek_ in contrary is just a clojure idiomatic
+  wrapper for the RabbitMQ java client written in pure Clojue.
+
+I have not said that _langohr_ is bad, just contrary, is a very good library.  The main reson because I have written _zaek_ is
+that I don't like much the _langohr_ api design and I want a little bit different approach.
+
+
+== Project Maturity
+
+_zaek_ is considered in alpha state.
+
+Since _zaek_ is a young project there may be some API breakage.
+
+
+== Install
+
+This section covers the _zaek_ library installing process and its requirements.
+
+
+=== Requirements
+
+_zaek_ is tested with these platforms:
+
+- JDK7
+- JDK8
+
+
+=== Leiningen
+
+The simplest way to use _zaek_ in a clojure project, is by including it in the dependency
+vector on your *_project.clj_* file:
+
+[source,clojure]
+----
+[funcool/zaek "0.1.0"]
+----
+
+
+=== Gradle
+
+If you are using gradle, this is a dependency line for gradle dsl:
+
+[source,groovy]
+----
+compile "funcool:zaek:0.1.0"
+----
+
+
+=== Get the Code
+
+_zaek_ is open source and you can found the source on link:https://github.com/niwibe/zaek[github].
+
+You can clone the public repository with this command:
+
+[source,text]
+----
+git clone https://github.com/funcool/zaek
+----
+
+== User Guilde
+
+TBD
+
+
+== FAQ
+
+TBD
+
+== How to Contribute?
+
+=== Philosophy
+
+Five most important rules:
+
+- Beautiful is better than ugly.
+- Explicit is better than implicit.
+- Simple is better than complex.
+- Complex is better than complicated.
+- Readability counts.
+
+All contributions to _zaek_ should keep these important rules in mind.
+
+
+=== Procedure
+
+**zaek** unlike Clojure and other Clojure contrib libs, does not have many
+restrictions for contributions. Just open a issue or pull request.
+
+
+=== License
+
+_zaek_ is licensed under BSD (2-Clause) license:
+
+----
+Copyright (c) 2015 Andrey Antukh <niwi@niwi.nz>
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+----
