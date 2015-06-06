@@ -96,13 +96,15 @@
     :as options}]
   (let [cfactory (ConnectionFactory.)]
     (doto cfactory
-      (.setUsername username)
-      (.setPassword password)
-      (.setHost host)
-      (.setPort port)
-      (.setVirtualHost vhost)
-      (.setRequestedHeartbeat heartbeat)
-      (.setConnectionTimeout timeout))
+      (.setUsername ^String username)
+      (.setPassword ^String password)
+      (.setHost ^String host)
+      (.setPort ^long port)
+      (.setVirtualHost ^String vhost)
+      (.setRequestedHeartbeat ^long heartbeat)
+      (.setConnectionTimeout ^long timeout)
+      (.setNetworkRecoveryInterval ^long recovery-interval)
+      (.setTopologyRecoveryEnabled ^bool topology-recovery))
     (DefaultConnection. (.newConnection cfactory))))
 
 (defn connect
