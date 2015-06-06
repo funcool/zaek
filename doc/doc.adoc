@@ -19,11 +19,11 @@ TBD
 I there already exists a RabbitMQ client for clojure, called link:https://github.com/michaelklishin/langohr[langohr];
 that has mature code base and is well established in clojure community. But on my point of view is has some flaws:
 
-- The api of _langohr_ is unnecesary splited in huge namespaces and usage of it is not very comfortable. _zaek_ maintains
+- The api of _langohr_ is unnecessarily splited in huge namespaces and usage of it is not very comfortable. _zaek_ maintains
   the most used functions in a `zaek.core` namespace, just import it and use.
 - The api of _langohr_ is highly based on the java client so is not very idiomatic in clojure (contrary to that it claims to be).
 - Is not lighweight as it claims to be, it has huge java code. _zaek_ in contrary is just a clojure idiomatic
-  wrapper for the RabbitMQ java client written in pure Clojue.
+  wrapper for the RabbitMQ java client written in pure Clojure.
 
 I have not said that _langohr_ is bad, just contrary, is a very good library.  The main reson because I have written _zaek_ is
 that I don't like much the _langohr_ api design and I want a little bit different approach.
