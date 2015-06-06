@@ -25,7 +25,7 @@ that has mature code base and is well established in clojure community. But on m
 - Is not lighweight as it claims to be, it has huge java code. _zaek_ in contrary is just a clojure idiomatic
   wrapper for the RabbitMQ java client written in pure Clojure.
 
-I have not said that _langohr_ is bad, just contrary, is a very good library.  The main reson because I have written _zaek_ is
+I have not said that _langohr_ is bad, just contrary, is a very good library.  The main reason because I have written _zaek_ is
 that I don't like much the _langohr_ api design and I want a little bit different approach.
 
 
