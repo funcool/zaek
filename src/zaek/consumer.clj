@@ -2,6 +2,7 @@
   (:require [clojure.walk :refer [stringify-keys keywordize-keys]])
   (:import com.rabbitmq.client.DefaultConsumer
            com.rabbitmq.client.Channel
+           com.rabbitmq.client.Envelope
            com.rabbitmq.client.AMQP$BasicProperties))
 
 (defprotocol IConsumer
@@ -19,10 +20,10 @@
   "Build basic props instance from options hash-map."
   {:no-doc true :version "0.1"}
   [{:keys [mode content-type userid appid messageid reply-to type priority]
-    :or {priority 0 mode 1 content-type "application/octet-stream"} :as options}]
+    :or {priority 0 mode 2 content-type "application/octet-stream"} :as options}]
   (let [builder (com.rabbitmq.client.AMQP$BasicProperties$Builder.)
         headers (dissoc options
-                        :mode :content-type :userud :appid
+                        :mode :content-type :userid :appid
                         :messageid :reply-to :type :priority)]
     (.contentType builder (name content-type))
     (.priority builder (.intValue priority))
@@ -52,7 +53,9 @@
                :content-type (.getContentType props)
                :messageid (.getMessageId props)
                :reply-to (.getReplyTo props)
-               :type (.getType props)}]
+               :type (.getType props)
+               :mode (.getDeliveryMode props)
+               :priority (.getPriority props)}]
     (merge basic (keywordize-keys (into {} (.getHeaders props))))))
 
 (defn adapt
