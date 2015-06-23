@@ -5,6 +5,7 @@
             :url "http://opensource.org/licenses/BSD-2-Clause"}
   :javac-options ["-target" "1.7" "-source" "1.7" "-Xlint:-options"]
   :dependencies [[org.clojure/clojure "1.6.0" :scope "provided"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha" :scope "test"]
                  [com.rabbitmq/amqp-client "3.5.3"]]
   :profiles {:dev {:global-vars {*warn-on-reflection* true}}})
 
