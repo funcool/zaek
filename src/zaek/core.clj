@@ -162,7 +162,7 @@
   ([channel name]
    (declare-queue! channel name {}))
   ([channel name' {:keys [durable exclusive autodelete]
-                  :or {exclusive true durable false autodelete true}}]
+                   :or {exclusive true durable false autodelete true}}]
    (let [chan (.-chan ^DefaultChannel channel)
          result (.queueDeclare ^Channel chan
                                ^String (name name')
@@ -203,6 +203,8 @@
    (let [^Channel chan (.-chan ^DefaultChannel channel)
          ^String queue (name queue)]
      (.basicConsume chan queue (consumer/adapt callback channel))))
+  ([channel queue autoack callback]
+   (consume channel queue autoack "" callback))
   ([channel queue autoack tag callback]
    (when-not (satisfies? consumer/IConsumer callback)
      (throw (IllegalArgumentException. "the callback should implement IConsumer protocol.")))
@@ -219,9 +221,8 @@
   ([channel tag]
    (ack channel tag false))
   ([channel tag multiple]
-   (let [^Channel chan (.-chan ^DefaultChannel channel)
-         ^String deliverytag (name tag)]
-     (.basicAck chan deliverytag multiple))))
+   (let [^Channel chan (.-chan ^DefaultChannel channel)]
+     (.basicAck chan tag multiple))))
 
 (defn nack
   "Acknowledge a recevied message by delivery tag."

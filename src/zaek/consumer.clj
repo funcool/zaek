@@ -66,7 +66,8 @@
   (let [^Channel chan (.-chan channel)]
     (proxy [DefaultConsumer] [chan]
       (handleDelivery [tag env properties body]
-        (let [props (props->map properties)]
+        (let [props (props->map properties)
+              tag (.getDeliveryTag ^Envelope env)]
           (onmessage consumer tag env props body)))
       (handleCancel [tag]
         (when (satisfies? IConsumerCancel consumer)
