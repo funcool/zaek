@@ -161,16 +161,19 @@
      (DefaultQueue. result)))
   ([channel name]
    (declare-queue! channel name {}))
-  ([channel name' {:keys [durable exclusive autodelete]
+  ([channel name' {:keys [durable exclusive autodelete ttl messagettl]
                    :or {exclusive true durable false autodelete true}}]
    (let [chan (.-chan ^DefaultChannel channel)
-         result (.queueDeclare ^Channel chan
-                               ^String (name name')
-                               ^Boolean durable
-                               ^Boolean exclusive
-                               ^Boolean autodelete
-                               {})]
-     (DefaultQueue. result))))
+         args (java.util.HashMap.)]
+     (when ttl (.put args "x-expires" ttl))
+     (when messagettl (.put args "x-message-ttl" messagettl))
+     (-> (.queueDeclare ^Channel chan
+                        ^String (name name')
+                        ^Boolean durable
+                        ^Boolean exclusive
+                        ^Boolean autodelete
+                        args)
+         (DefaultQueue.)))))
 
 (defn bind-queue!
   "Bind queue to an exchange using given

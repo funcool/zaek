@@ -19,7 +19,7 @@
 (defn build-props
   "Build basic props instance from options hash-map."
   {:no-doc true :version "0.1"}
-  [{:keys [mode content-type userid appid messageid reply-to type priority]
+  [{:keys [mode content-type userid appid messageid reply-to type priority ttl]
     :or {priority 0 mode 2 content-type "application/octet-stream"} :as options}]
   (let [builder (com.rabbitmq.client.AMQP$BasicProperties$Builder.)
         headers (dissoc options
@@ -28,7 +28,8 @@
     (.contentType builder (name content-type))
     (.priority builder (.intValue priority))
     (.deliveryMode builder (.intValue mode))
-
+    (when ttl
+      (.expiration builder ttl))
     (when userid
       (.userId builder (name userid)))
     (when appid
