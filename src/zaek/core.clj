@@ -247,6 +247,24 @@
         ^String consumertag (name tag)]
     (.basicCancel chan consumertag)))
 
+(defn delete-exchange
+  "Delete an exchange."
+  {:version "0.1"}
+  ([channel exchange]
+   (delete-exchange channel exchange false))
+  ([channel exchange ifunused]
+   (.exchangeDelete ^Channel channel (name exchange) ifunused)))
+
+(defn delete-queue
+  "Delete a queue."
+  {:version "0.1"}
+  ([channel queue]
+   (delete-queue channel queue false false))
+  ([channel queue ifunused]
+   (delete-queue channel queue ifunused false))
+  ([channel queue ifunused ifempty]
+   (.queueDelete ^Channel channel queue ifempty ifempty)))
+
 (defn close
   "A polymorphic function for close resources.
 
