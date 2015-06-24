@@ -138,12 +138,12 @@
        (.basicQos chan prefetch))
      (DefaultChannel. chan))))
 
-(defn declare-exchange!
+(defn declare-exchange
   "Declare an exchange with given name and
   optionally given options."
   {:version "0.1"}
   ([channel exchange]
-   (declare-exchange! channel exchange {}))
+   (declare-exchange channel exchange {}))
   ([channel exchange {:keys [type durable autodelete internal]
                       :or {type :direct durable false autodelete true internal false}}]
    (let [^String exchange' (name exchange)
@@ -152,7 +152,7 @@
      (.exchangeDeclare chan exchange' type durable autodelete internal {})
      exchange)))
 
-(defn declare-queue!
+(defn declare-queue
   "Declare a server-named or named queue."
   {:version "0.1"}
   ([channel]
@@ -160,7 +160,7 @@
          result (.queueDeclare ^Channel chan)]
      (DefaultQueue. result)))
   ([channel name]
-   (declare-queue! channel name {}))
+   (declare-queue channel name {}))
   ([channel name' {:keys [durable exclusive autodelete ttl messagettl]
                    :or {exclusive true durable false autodelete true}}]
    (let [chan (.-chan ^DefaultChannel channel)
@@ -175,7 +175,7 @@
                         args)
          (DefaultQueue.)))))
 
-(defn bind-queue!
+(defn bind-queue
   "Bind queue to an exchange using given
   routing key."
   {:version "0.1"}
